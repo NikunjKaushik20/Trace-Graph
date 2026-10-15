@@ -1,0 +1,37 @@
+name: Scoreboard
+
+on:
+  workflow_dispatch:
+    inputs:
+      seeds:
+        description: "Seeds per lane and adversary"
+        default: "100"
+      workers:
+        description: "Markets played at once"
+        default: "3"
+
+jobs:
+  scoreboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    services:
+      falkordb:
+        image: falkordb/falkordb:v4.22.0
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      FALKORDB_URL: redis://localhost:6379
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - run: uv run tracegraph-scoreboard --seeds ${{ inputs.seeds }} --workers ${{ inputs.workers }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scoreboard
+          path: results/scoreboard.json
