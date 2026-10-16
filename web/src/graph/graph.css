@@ -1,0 +1,54 @@
+.graph {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.graph-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.graph-canvas.is-interactive {
+  cursor: grab;
+  touch-action: none;
+}
+
+.graph-canvas.is-interactive:active {
+  cursor: grabbing;
+}
+
+.graph-card {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  max-width: 260px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(250, 250, 252, 0.94);
+  box-shadow: var(--edge-subtle);
+  backdrop-filter: blur(20px);
+  font-size: var(--text-nav);
+  letter-spacing: var(--track-nav);
+  pointer-events: none;
+  transform: translate(14px, 14px);
+}
+
+.graph-card strong {
+  font-size: var(--text-small);
+  font-weight: 600;
+}
+
+.graph-card span {
+  color: var(--slate);
+}
+
+.graph-card code {
+  overflow: hidden;
+  color: var(--steel);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
