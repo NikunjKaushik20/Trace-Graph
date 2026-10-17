@@ -1,0 +1,234 @@
+.proof-duel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 880px;
+  margin: var(--space-64) auto 0;
+  text-align: center;
+}
+
+.proof-duel figure {
+  margin: 0;
+  padding: var(--space-8) var(--space-40);
+}
+
+.proof-duel figure + figure {
+  border-left: 1px solid var(--control-gray);
+}
+
+.proof-duel figcaption {
+  font-family: var(--font-display);
+  font-size: var(--text-kicker);
+  font-weight: 600;
+  line-height: 1.19;
+}
+
+.proof-number {
+  margin-top: var(--space-16);
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.proof-caption {
+  margin-top: var(--space-12);
+  color: var(--slate);
+  font-size: var(--text-small);
+  letter-spacing: var(--track-small);
+}
+
+.proof-tools {
+  width: 100%;
+  max-width: 880px;
+  margin: var(--space-64) auto 0;
+  border-collapse: collapse;
+  font-size: var(--text-small);
+  letter-spacing: var(--track-small);
+}
+
+.proof-tools caption {
+  padding-bottom: var(--space-12);
+  font-weight: 600;
+  text-align: left;
+}
+
+.proof-tools th,
+.proof-tools td {
+  padding: 12px 0;
+  border-top: 1px solid var(--control-gray);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.proof-tools th {
+  width: 48%;
+  padding-right: var(--space-24);
+  color: var(--slate);
+}
+
+.race h3,
+.scoreboard h3 {
+  font-size: var(--text-card-title);
+  line-height: 1.17;
+}
+
+.race {
+  margin-top: var(--section-gap);
+  padding: var(--space-40);
+  border-radius: var(--radius-card);
+  background: var(--studio-mist);
+}
+
+.race-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-20);
+}
+
+.race-head .notice {
+  max-width: 520px;
+  margin-top: var(--space-8);
+}
+
+.race-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.race-seed {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.race-seed .field {
+  width: 104px;
+  min-height: 34px;
+  padding: 6px 16px;
+  font-size: var(--text-small);
+}
+
+.race-lanes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-28);
+  margin-top: var(--space-40);
+}
+
+.race-lane {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding-top: var(--space-20);
+  border-top: 2px solid var(--hairline);
+}
+
+.race-lane h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-kicker);
+  font-weight: 600;
+}
+
+.race-lane-line {
+  color: var(--slate);
+  font-size: var(--text-small);
+  letter-spacing: var(--track-small);
+  line-height: 1.43;
+}
+
+.race-number {
+  margin-top: var(--space-16);
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.8px;
+}
+
+.race-progress {
+  height: 3px;
+  margin-top: var(--space-12);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.race-progress i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 120ms linear;
+}
+
+.race-lane.is-idle .race-number {
+  color: var(--steel);
+}
+
+.race-verdict {
+  min-height: 1.47em;
+  max-width: 62ch;
+  margin-top: var(--space-24);
+  font-size: var(--text-body);
+}
+
+.scoreboard {
+  margin-top: var(--space-48);
+}
+
+.scoreboard h3 {
+  margin-bottom: var(--space-16);
+}
+
+.scoreboard-limits {
+  max-width: 65ch;
+  margin-top: var(--space-20);
+}
+
+@media (max-width: 1068px) {
+  .race-lanes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 734px) {
+  .proof-duel {
+    margin-top: var(--space-40);
+  }
+
+  .proof-duel figure {
+    padding: var(--space-8) var(--space-12);
+  }
+
+  .proof-duel figcaption {
+    font-size: var(--text-body);
+  }
+
+  .proof-number {
+    font-size: 64px;
+  }
+
+  .proof-tools th {
+    width: 55%;
+  }
+
+  .race {
+    padding: var(--space-20);
+    border-radius: 22px;
+  }
+
+  .race-lanes {
+    gap: var(--space-12);
+  }
+
+  .race-number {
+    font-size: 40px;
+  }
+}

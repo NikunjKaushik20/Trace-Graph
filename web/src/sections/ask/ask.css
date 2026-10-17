@@ -1,0 +1,70 @@
+.ask {
+  display: grid;
+  gap: var(--space-20);
+}
+
+.ask-form {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.ask-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+  font-size: var(--text-small);
+}
+
+.ask-answer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-28);
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--control-gray);
+  animation: answer-in 420ms var(--ease-out) both;
+}
+
+.ask-text {
+  font-family: var(--font-display);
+  font-size: var(--text-kicker);
+  line-height: 1.38;
+  letter-spacing: 0.011em;
+  white-space: pre-line;
+}
+
+.ask-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: var(--space-20) 0 var(--space-8);
+}
+
+.ask-graph {
+  display: grid;
+  min-height: 340px;
+  place-items: center;
+  border-radius: 22px;
+  background: var(--paper-frost);
+  overflow: hidden;
+}
+
+.ask-graph .graph {
+  height: 340px;
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 860px) {
+  .ask-form {
+    flex-direction: column;
+  }
+
+  .ask-answer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
