@@ -72,6 +72,57 @@ Tests: `./check.sh` runs formatting, lint, strict mypy, the style rules, the QUE
 
 ## Graph data model
 
+The whole market is one graph. The first map follows a hire from the company to the payment; the second shows the money behind the reviews, which is where rings get caught. The site's opening graph draws the same thing live from FalkorDB.
+
+**A hire, from the company to the payment**
+
+```mermaid
+flowchart LR
+  Principal -->|OWNS| Buyer
+  Buyer -->|RECEIVED| Task
+  Task -->|SPLIT_INTO| Job
+  Job -->|FOR| Provider
+  Job -->|DECIDED_BY| Decision
+  Decision -->|RANKED / CHOSE / EXCLUDED| Provider
+  Decision -->|BASED_ON| Counted["Job settled earlier"]
+  Decision -->|IGNORED| Claim
+  Claim -->|ABOUT| Provider
+  Buyer -->|MADE| Payment
+  Payment -->|FOR_JOB| Job
+  Payment -->|FOR_DECISION| Decision
+```
+
+**Reviews, money and the ring**
+
+```mermaid
+flowchart LR
+  Writer -->|REPORTED| Provider
+  Writer -->|WROTE| Claim
+  Writer -->|FUNDED_BY| Wallet
+  Provider -->|FUNDED_BY| Wallet
+  Wallet -->|FUNDED_BY| Root
+  Decision -->|TRACED_FUNDING| Provider
+  Decision -->|INVESTIGATED| Ring
+  Ring -->|MEMBER| Provider
+  Ring -->|MEMBER| Writer
+  Ring -->|MEMBER| Wallet
+  Policy -->|TARGETS| Ring
+  Policy -->|COVERS| Provider
+  Policy -->|JUSTIFIED_BY| Decision
+  Buyer -->|LEARNED| Lesson
+  Lesson -->|FROM| Decision
+  Lesson -->|ABOUT| Provider
+```
+
+Before a review counts, the guard asks two questions of this map: is the writer an admitted buyer, and does it share a funder with the provider it praised?
+
+```
+(w:Writer)-[:REPORTED]->(p:Provider)
+(w)-[:FUNDED_BY*1..3]->(funder)<-[:FUNDED_BY*1..3]-(p)
+```
+
+A review that fails either check becomes a `Claim` the decision ignores, with the reason on it. When the agent follows the money with `funding_path`, the path it found is saved on the decision as `TRACED_FUNDING`, and the receipt shows it.
+
 ### Nodes
 
 | Label | What it is | Key properties |
